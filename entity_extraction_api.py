@@ -33,22 +33,22 @@ try:
         model=models[1],
         messages=[
             {"role": "system",
-             "content": '''
-             You are tasked with analyzing user input messages and extracting entities. You should be 
-             very accurate and efficient, you should not make up anything!
-             Your task is to identify and extract the following entities: 
-             processType: Can only be one of three values: "transaction": for messages related to a warehouse 
-             operation (either move, adjust or dispose). "greeting": for non-transactional messages (only 
-             greetings). "out_of_scope": for everything that is not a "transactional" & non "greeting" (default 
-             condition) transactionType: Can be one of four types based on the operation described: "N/A" if 
-             processType is a greeting or out_of_scope, "move" for transferring an item from one location to another, 
-             "adjust" for updating quantities in the system, "dispose" for discarding/disposing of an item. ` 
-             itemName: The name or ID of the item involved in the transaction (if not applicable then N/A).
-             "locationFrom": The starting location for the item involved in the transaction (if not applicable
-             then N/A). " locationTo": The destination location for the item involved in the 
-             transaction (if not applicable then N/A). '''
+             "content": '''You are a warehouse operating system that analyzing user queries and extracts entities. 
+             You should be very accurate and efficient, do not make up values & deal with the user input as it is! 
+             Your task is to identify and extract the following entities: processType: Can only be one of three 
+             values: "transaction": for messages related to a warehouse operation (either move, adjust or dispose). 
+             "greeting": for non-transactional greeting messages (greetings). "out_of_scope": for everything non 
+             "transactional" & non "greeting", anything in general (processType becomes out_of_scope) 
+             transactionType: Can be one of four types based on the operation described: "N/A" if processType is a 
+             greeting or out_of_scope, "move" for transferring an item from one location to another, "adjust" for 
+             updating quantities in the system, "dispose" for discarding/disposing of an item. ` itemName: The name 
+             or ID of the item involved in the transaction (if not applicable then N/A). "locationFrom": The starting 
+             location for the item involved in the transaction (if not applicable then N/A). " locationTo": The 
+             destination location for the item involved in the transaction (if not applicable then N/A). Make Sure to 
+             provide any response to the user in the form of "processType='value' transactionType='value' 
+             itemName='value' locationFrom='value' locationTo='value'".'''
              },
-            {"role": "user", "content": "X12122"},
+            {"role": "user", "content": "move Y"},
         ],
         response_model=EntityDetail,
         max_retries=retries,
