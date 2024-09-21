@@ -82,4 +82,5 @@ def ExtractEntity(_input_):
 
 
 if __name__ == "__main__":
-    ExtractEntity("move x from 1 to 2")
+    x = ExtractEntity("move x from 1 to 2")
+    print(x)
